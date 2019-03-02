@@ -1,3 +1,4 @@
+
 class Sun {
   PShape sun_body, sun_rays;
   float x, y, w_rays, h_rays, w_body, h_body;
@@ -16,9 +17,14 @@ class Sun {
 
 
   void display() {
+    
+    pushMatrix();
+    translate(x,y);
     shapeMode(CENTER);
-    shape(sun_rays, x, y, w_rays, h_rays);
-    shape(sun_body, x, y, w_body, h_body);
+    rotate(angle);
+    shape(sun_rays, 0, 0, w_rays, h_rays);
+    shape(sun_body, 0, 0, w_body, h_body);
+    popMatrix();
   }
 
   void pulseOut() {
@@ -36,11 +42,12 @@ class Sun {
   }
 
   void raySpin() {
-    translate(x, y);
-    sun_rays.rotate(angle);
-    while (angle < TWO_PI){
-      angle += 0.1;
+    
+    if (angle < TWO_PI){
+      angle += 0.05;
     }
+    else{
+      angle=0;}
   }
   
 }
