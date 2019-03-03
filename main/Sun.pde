@@ -1,4 +1,3 @@
-
 class Sun {
   PShape sun_body, sun_rays;
   float x, y, w_rays, h_rays, w_body, h_body;
