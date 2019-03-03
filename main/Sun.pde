@@ -1,7 +1,7 @@
 class Sun {
   PShape sun_body, sun_rays;
   float x, y, w_rays, h_rays, w_body, h_body;
-  float angle = 0.1;
+  float angle = 0;
 
   Sun() {
     sun_rays = loadShape("sun_rays.svg");
@@ -45,10 +45,11 @@ class Sun {
   void raySpin() {
     
     if (angle < TWO_PI){
-      angle += 0.05;
+      angle += 0.015;
     }
-    else{
-      angle=0;}
+    else {
+      angle = 0;
+    }
   }
   
 }
