@@ -1,0 +1,24 @@
+Assignment 4: Group 16 Progress Report
+The Story
+A kite will be flying in the sky, with a butterfly floating randomly. The sun will be shining, but clouds
+will also be floating through the gradient blue sky.
+
+Animated Objects
+Three objects are being animated within this sequence – a kite, a butterfly, and a sun.
+
+Length of Sequence
+The sequence will continue indefinitely, or until the user clicks stop.
+
+Technical considerations
+This animation requires a kite, butterfly, sun, and cloud class. 
+The kite class has a kitehead and a kitestring. 
+The kite floats across the sky as a whole, a translation, and the kitehead will rotate on a pivot point, where it’s attached to the string, a rotation. 
+The butterfly class has a body and wings. The butterfly moves in sin and cos function with different angle of rotating. 
+A scale is used to keep the wings amplifying and shrinking to create the feeling of flapping.
+The sun's rays rotate around the center, and the sun itself grows and shrinks by changing the width and height of the body.
+
+Work-share and plans for integration
+Susan coded the kite. 
+Vanessa coded the sun and clouds, as well as creating the gradient for the background.
+Jing coded the butterfly.
+We all helped put together the different parts to create a cohesive scene.
