@@ -7,8 +7,8 @@ class scepter{
   float z = 0;
   float speed = 0;
   PShape scepterLotus;
-  scepter(){
-    this.speed = speed;
+  scepter(float z){
+    this.z = z;
     scepterLotus = loadShape("lotus/lotus_OBJ_high/lotus_OBJ_high.obj");
     scepterLotus.setFill(color(234, 181, 206));
     aBox = createShape(BOX,2);
@@ -21,7 +21,7 @@ class scepter{
 void display(){
   //spotLight(220, 10, 10, 0, 0, 0, 0, 1, 0, 0, 2);
   //ambientLight(102, 100, 20);
-  translate(0, 0, z);
+  translate(0, 0, this.z);
   pushMatrix();
   scale(-20);
   shape(scepterLotus);
@@ -36,7 +36,10 @@ void display(){
   popMatrix();
   x++;
   y++;
-  z -= 10;
+  this.z -= 10;
+  if (this.z <= -6200){
+    this.z = 0;
+  }
   this.speed -= 10;
 }
 }

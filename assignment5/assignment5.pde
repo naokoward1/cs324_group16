@@ -23,7 +23,7 @@ void setup(){
   background(sky);
   
   house = new House();
-  theScepter = new scepter();
+  theScepter = new scepter(0);
   Messi=new Player(width/2,height/2,0);
 }
 
