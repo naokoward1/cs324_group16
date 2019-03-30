@@ -1,11 +1,10 @@
+//lotus from https://www.turbosquid.com/3d-models/free-max-model-flower/1116825
+
 class scepter{
-  PShape pieta;
-  PShape shape2;
   PShape aBox;
   float x = 0;
   float y= 0;
   float z = 0;
-  float speed = 0;
   PShape scepterLotus;
   scepter(float z){
     this.z = z;
@@ -19,8 +18,6 @@ class scepter{
   
 
 void display(){
-  //spotLight(220, 10, 10, 0, 0, 0, 0, 1, 0, 0, 2);
-  //ambientLight(102, 100, 20);
   translate(0, 0, this.z);
   pushMatrix();
   scale(-20);
@@ -31,7 +28,6 @@ void display(){
   shape(aBox);
   translate(x, y);
   scepterLotus.rotateY(PI/190);
-  //camera(0,0,0, mouseX, mouseY, 0, 0, 0);
   rotateZ(PI/2);
   popMatrix();
   x++;
@@ -40,6 +36,5 @@ void display(){
   if (this.z <= -6200){
     this.z = 0;
   }
-  this.speed -= 10;
 }
 }

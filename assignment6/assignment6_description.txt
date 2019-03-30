@@ -1,0 +1,11 @@
+We created a soccer game simulation using flocking, particle, and physics- based simulations.
+The three classes are player, ball, and cloud. The players will have flocking behavior.
+They are drawn to the ball, but are limited by how close they can be to each other.
+The ball relies on physics to create projectile motion, and the players' movements are dependent on
+its x coordinates. The ball also uses gravity and has a force applied to it at the beginning
+of its motion which determines its velocity. The clouds follow rules independent of the players and ball,
+in which they move towards an anchor point. They darken as they become in proximity with each other,
+and double when they reach the anchor point.
+Vanessa did the ball, Jing did the players, and Susan did the clouds. 
+Unexpected challenges were the scaling of the cloud, which was resolved by changing the radius
+of the spheres which make up the cloud.
