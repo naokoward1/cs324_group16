@@ -13,7 +13,7 @@ class dog{
   }
   void update(){
     if(this.x<0){
-      this.x=width;
+      this.x=random(width, width+500);
     }
   }
 }

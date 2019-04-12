@@ -39,7 +39,7 @@ void setup(){
   theTimer = new Timer(10000);
   for (int i=0; i<yarns.length; i++){
     float x=random(30,width-30);
-    float y=random(0, 50);
+    float y=random(-600, -50);
     float speed=5;
     yarns[i]=new yarn(x, y, speed);
   }
@@ -95,7 +95,7 @@ void playPage(){
   text("score: ", 30, 50);
   text(score, 120, 50);
   text("time: ", width-180, 50);
-  float time = theTimer.elapsedTime;
+  float time = theTimer.segmentTime;
   text(time, width - 120, 50);
   for (int i=0; i<5;i++){
     yarns[i].show();
@@ -113,10 +113,9 @@ void playPage(){
       score += 100;
     }
   }
-  runDog();
   if(runDog()){
     score -= 200;
-    doggo.x = width;
+    doggo.x = random(width, width+500);
   }
 }
   /*
@@ -136,9 +135,9 @@ boolean collectYarn(yarn aYarn){
     aYarn.x = random(width);
     return true;
   }
-    if(aYarn.y > height){
-      aYarn.y = 0;
-    }
+  if(aYarn.y > height){
+    aYarn.y = 0;
+  }
   return false;
 }
 boolean runDog(){
