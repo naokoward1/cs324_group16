@@ -1,8 +1,10 @@
 class Player {
   // position
   float x, y, direction;
-  float velocity = 10;
+  float velocity = 8;
   float gravity = 3;
+  int frame;
+  int catState = 0;
   
   // sprites
   int numFrames = 4;
@@ -24,21 +26,36 @@ class Player {
     this.x = x;
     this.y = y;
     this.direction = direction;
+    
+    // assign frame and state
+    this.catState = 0;
+    this.frame = 0;
   }
   
   // display
-  void display(PImage img, float x, float y){
-    image(img, x, y);
+  void display(){
+    if (cat.catState == 0 && direction == 1){
+      image(walk_right[frame], x, y);
+    }
+    else if (cat.catState == 0 && direction == -1){
+      image(walk_left[frame], x, y);
+    }
+    else if (cat.catState == 1){
+      image(walk_right[frame], x, y);
+    }
+    else if (cat.catState == 2){
+      image(walk_left[frame], x, y);
+    }
+    
   }
 
   // run right function ; toggled by right arrow
   void walkRight(){
     direction = 1;
     
-    int frame = frameCount % numFrames;
+    frame = frameCount % numFrames;
     if (x >= 0 && x <= width - 57){
       x += velocity;
-      display(walk_right[frame], x, y);
     }
     else if (x < 0){
       x = 0;
@@ -52,10 +69,9 @@ class Player {
   void walkLeft(){
     direction = -1;
     
-    int frame = frameCount % numFrames;
+    frame = frameCount % numFrames;
     if (x >= 0 && x <= width - 57){
       x -= velocity;
-      display(walk_left[frame], x, y);
     }
     else if (x < 0){
       x = 0;
@@ -67,12 +83,7 @@ class Player {
   
   // idle function ; key release
   void idle(){
-    if (direction == 1){
-      display(walk_right[0], x, y);
-    }
-    else{
-      display(walk_left[0], x, y);
-    }
+    frame = 0;
   }
 
 }
