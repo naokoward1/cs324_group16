@@ -3,9 +3,6 @@ class Timer{
   int interval = 2000;
   float totalTime; float segmentTime; float elapsedTime;
   Timer(int interval){
-    this.segmentTime = segmentTime;
-    this.totalTime = totalTime;
-    this.elapsedTime = elapsedTime;
     this.interval = interval;
     this.timer = millis();
   }
@@ -22,6 +19,11 @@ class Timer{
       this.elapsedTime += this.segmentTime;
       this.segmentTime = 0;
     }
+  }
+  void restart(){
+    this.elapsedTime = 0;
+    this.segmentTime = 0;
+    this.elapsedTime = 0;
   }
 }
 

@@ -1,14 +1,11 @@
 PImage start;
 PImage backgroundImage;
 PImage win;
-PImage gameOver;
+PImage gameOverImage;
 PImage pausedImage;
 String page = "startPage";
 boolean paused = false;
-int pauseStart;
-int pauseEnd;
 Timer theTimer;
-boolean started = false;
 int score = 0; 
 Point[] points;
 Point myPoint;
@@ -16,7 +13,6 @@ yarn[] yarns=new yarn[20];
 dog doggo;
 int framecount = 0;
 PImage ground;
-boolean gameOverFlag = false;
 
 void setup(){
   points = new Point[30];
@@ -34,10 +30,10 @@ void setup(){
   pausedImage = loadImage("../A7_Assets/Screen_Layout/paused.png");
   pausedImage.resize(width, height);
   ground = loadImage("../A7_Assets/Screen_Layout/ground.png");
-  gameOver = loadImage("../A7_Assets/Screen_Layout/gameover.png");
-  gameOver.resize(width, height);
+  gameOverImage = loadImage("../A7_Assets/Screen_Layout/gameover.png");
+  gameOverImage.resize(width, height);
   background(start);
-  theTimer = new Timer(2000);
+  theTimer = new Timer(3000);
   for (int i=0; i<yarns.length; i++){
     float x=random(30,width-30);
     float y=random(-600, -50);
@@ -49,33 +45,27 @@ void setup(){
 }
 
 void draw(){
-  println(page);
   if (page=="startPage"){
-    gameOverFlag = false;
-    started = false;
     background(start);
+    //reset score
+    score = 0;
+    //reset timer
+    theTimer.timer = millis();
   }
-  else if(page=="gameOverPage"){
-    image(gameOver, 0, 0);
-  }
-  else if(paused){
-    image(pausedImage, 0, 0);
-  }
-  else if (page=="playPage"){
-    if(!started){
-      theTimer.timer = millis();
-      started = true;
+  else if(page=="playPage"){
+    if(timeOver(theTimer)){
+      page = "gameOverPage";
     }
-    playPage();
+    else if (!paused){
+      playInProgress();
+    }
+    else{
+      playPaused();
+    }
   }
-  theTimer.update();
-  if(theTimer.update() > theTimer.interval){
-    theTimer.elapsedTime = 0;
-    theTimer.segmentTime = 0;
-    theTimer.totalTime = 0; 
-    page = "gameOverPage";
+  else if (page=="gameOverPage"){
+    gameOverScreen();
   }
-  //println(score);
 }
 
 void keyPressed(){
@@ -83,27 +73,24 @@ void keyPressed(){
     if(page=="startPage"){
       page = "playPage";
     }
+    else if(page=="playPage"){
+      paused = !paused;
+    }
     else if(page=="gameOverPage"){
       page = "startPage";
-    }
-    else if(paused){
-      paused = false;
-    }
-    else if(!paused){
-      theTimer.pauseTimer();
-      paused = true;
     }
   }
 }
 
-void playPage(){
+void playInProgress(){
   background(backgroundImage);
   myPoint.display();
   text("score: ", 30, 50);
   text(score, 120, 50);
   text("time: ", width-180, 50);
-  float time = theTimer.segmentTime;
-  text(time, width - 120, 50);
+  int time = int((theTimer.interval - theTimer.totalTime) / 1000);
+  String timeLeft = "00:" + nf(time, 2);
+  text(timeLeft, width - 110, 50);
   for (int i=0; i<5;i++){
     yarns[i].show();
   }
@@ -124,17 +111,13 @@ void playPage(){
     score -= 200;
     doggo.x = random(width, width+500);
   }
-}
-  /*
-  else if(runDog){
-    score -= 200;
-  }  
-  */
-
-void gameOver(){
-  gameOverFlag = true;
+  theTimer.update();
 }
 
+void playPaused(){
+  paused = true;
+  background(pausedImage);
+}
 
 boolean collectYarn(yarn aYarn){
   if((abs(aYarn.x - myPoint.x) < 50) && abs(aYarn.y - myPoint.y) < 50){
@@ -148,9 +131,28 @@ boolean collectYarn(yarn aYarn){
   return false;
 }
 boolean runDog(){
-  print(doggo.x, "is doggo.x\n", doggo.y, "is doggo.y\n", myPoint.x, "is myPoint.x\n",
-    myPoint.y, "is myPoint.y\n");
+  //print(doggo.x, "is doggo.x\n", doggo.y, "is doggo.y\n", myPoint.x, "is myPoint.x\n",
+    //myPoint.y, "is myPoint.y\n");
   if((abs(doggo.x - myPoint.x) < 10 && abs(doggo.y - myPoint.y) < 125)){
+    return true;
+  }
+  return false;
+}
+
+void gameOverScreen(){
+  background(gameOverImage);
+  if(score>1000){
+    text("You win!", 2*width/3, 50);
+  }
+  else{
+    text("You lose :(", 2*width/3, 50);
+  }
+  text("score: ", 100, 50);
+  text(score, 190, 50);
+}
+
+boolean timeOver(Timer theTimer){
+  if(theTimer.update() > theTimer.interval){
     return true;
   }
   return false;
