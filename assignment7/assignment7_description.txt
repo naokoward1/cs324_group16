@@ -1,0 +1,56 @@
+Premise of the game: A cat runs back and forth on the screen and collects treats 
+that fall from the sky. The cat must avoid incoming dogs and collect enough treats
+(and thus, points) to win in a given amount of time. For the purpose of this demonstration,
+that time is set to 10 seconds, but can be changed in the initialization of the
+timer object.
+
+Three rules of play:
+The cat cannot run into the dog.
+The cat moves at a given rate. 
+The cat has a given amount of time to acquire points.
+
+Keyboard inputs:
+Left arrow moves the cat left.
+Right arrow moves the cat right.
+Up arrow has the cat jump. 
+Space bar pauses the game. 
+Q quits the game, while h displays the help window.
+
+Visual display:
+A cat (the player) will run back and forth on the screen and 
+yarn will fall from the sky for the player to collect. 
+Occasionally, a dog will run across the screen that the player will have to
+dodge by jumping over it. Collecting yarn will gain points, 
+while running into a dog will have you lose points. 
+
+GUI interface:
+The current score and remaining time are displayed on the screen.
+The score will be displayed, as well as whether or not you win or lose, 
+once time is up. 
+
+Win or lose condition:
+Once time is up, it checks how many points you have. 
+If you have at least 500 points, you win. If you have less, you lose. 
+
+Classes:
+The cat class is the player and has the functionality of moving right, left, and jumping.
+The yarn class can fall from the sky.
+The dog class moves across the screen.
+The timer class keeps track of the time. 
+
+Extra credit:
+Pause screen: The game can be paused by pressing the space button. 
+Pressing the space button again resumes the game, while pressing q quits the game.
+Animated sprites: We used Vanessa's sprite (the cat).
+
+Unexpected challenges:
+The main challenge was getting the sprite to not lag, but
+was accomplished with Professor Abraham's advice.
+
+Splitting the work:
+Vanessa provided the artwork (yarn, dog, and cat classes, as 
+well as the background for the start, gameOver, and play screens.
+She also implemented the cat sprite class.
+Jing implemented the dog and yarn classes.
+Susan implemented the interphase.
+

@@ -11,7 +11,6 @@ String page = "startPage";
 boolean paused = false;
 Timer theTimer;
 int score = 0; 
-Point myPoint;
 yarn[] yarns=new yarn[20];
 dog doggo;
 int framecount = 0;
@@ -23,7 +22,6 @@ String beforePage;
 void setup(){
   frameRate(30);
   cat = new Player(width/2, (height-67)-87, 1);
-  myPoint = new Point(200, 500, 20);
   surface.setResizable(true);
   size(800, 600);
   start = loadImage("../A7_Assets/Screen_Layout/start.png");
@@ -177,7 +175,7 @@ boolean collectYarn(yarn aYarn){
 boolean runDog(){
   //print(doggo.x, "is doggo.x\n", doggo.y, "is doggo.y\n", myPoint.x, "is myPoint.x\n",
     //myPoint.y, "is myPoint.y\n");
-  if((abs(doggo.x - cat.position.x) < 10 && abs(doggo.y - 155 - cat.position.y) < 5)){
+  if((abs(doggo.x - cat.position.x) < 10 && abs(doggo.y - 155 - cat.position.y) < 15)){
     return true;
   }
   return false;
