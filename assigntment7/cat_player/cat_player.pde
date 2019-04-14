@@ -27,6 +27,11 @@ void keyPressed() {
       cat.catState = 2;
       cat.walkLeft();
     }
+    else if (keyCode == UP) {
+      checkInput = true;
+      cat.catState = 3;
+      cat.jump();
+    }
   }
 }
 

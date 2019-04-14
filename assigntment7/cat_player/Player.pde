@@ -1,8 +1,12 @@
 class Player {
   // position
   float x, y, direction;
-  float velocity = 8;
-  float gravity = 3;
+  float velocity = 10;
+  float jumpVelocity = 5;
+  float gravity = 5;
+  PVector position;
+  
+  // check frame
   int frame;
   int catState = 0;
   
@@ -25,6 +29,7 @@ class Player {
     // assign position
     this.x = x;
     this.y = y;
+    this.position = new PVector(this.x, this.y);
     this.direction = direction;
     
     // assign frame and state
@@ -34,19 +39,48 @@ class Player {
   
   // display
   void display(){
-    if (cat.catState == 0 && direction == 1){
-      image(walk_right[frame], x, y);
-    }
-    else if (cat.catState == 0 && direction == -1){
-      image(walk_left[frame], x, y);
-    }
-    else if (cat.catState == 1){
-      image(walk_right[frame], x, y);
-    }
-    else if (cat.catState == 2){
-      image(walk_left[frame], x, y);
+    if (position.y < (height - 67) - 87){
+      position.y += gravity;
+      if (direction == 1){
+        position.x += jumpVelocity;
+      }
+      else {
+        position.x -= jumpVelocity;
+      }
     }
     
+    if (catState == 0){
+      if (direction == 1){
+        image(walk_right[frame], position.x, position.y);
+      }
+      else {
+        image(walk_left[frame], position.x, position.y);
+      }
+    }
+    else if (catState == 0 && direction == -1){
+      image(walk_left[frame], position.x, position.y);
+    }
+    else if (catState == 1){
+      image(walk_right[frame], position.x, position.y);
+    }
+    else if (catState == 2){
+      image(walk_left[frame], position.x, position.y);
+    }
+    else if (catState == 3){
+      if (direction == 1){
+        image(walk_right[frame], position.x, position.y);
+      }
+      else {
+        image(walk_left[frame], position.x, position.y);
+      }
+    } 
+  }
+  
+  void jump(){
+    if (position.y == (height - 67) - 87){
+      position.y -= 80;
+      frame = 2;
+    }
   }
 
   // run right function ; toggled by right arrow
@@ -55,13 +89,13 @@ class Player {
     
     frame = frameCount % numFrames;
     if (x >= 0 && x <= width - 57){
-      x += velocity;
+      position.x += velocity;
     }
     else if (x < 0){
-      x = 0;
+      position.x = 0;
     }
     else if (x > width - 57){
-      x = width - 57;
+      position.x = width - 57;
     }
   }
   
@@ -71,13 +105,13 @@ class Player {
     
     frame = frameCount % numFrames;
     if (x >= 0 && x <= width - 57){
-      x -= velocity;
+      position.x -= velocity;
     }
     else if (x < 0){
-      x = 0;
+      position.x = 0;
     }
     else if (x > width - 57){
-      x = width - 57;
+      position.x = width - 57;
     }
   }
   
