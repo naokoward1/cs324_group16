@@ -1,5 +1,5 @@
 class dog{
-  float speed=3;
+  float speed=7;
   float x;
   float y;
   PImage dogimg=loadImage("../A7_Assets/Screen_Layout/doggo.png");
